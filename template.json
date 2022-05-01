@@ -875,44 +875,44 @@
           "value": "true"
         },
         {
-          "name": "traefik.http.middlewares.foundryvtt-https-redirect.redirectscheme.scheme",
+          "name": "traefik.http.middlewares.filebrowser-https-redirect.redirectscheme.scheme",
           "value": "https"
         },
         {
-          "name": "traefik.http.routers.foundryvtt-secure.entrypoints",
+          "name": "traefik.http.routers.filebrowser-secure.entrypoints",
           "value": "https"
         },
         {
-          "name": "traefik.http.routers.foundryvtt-secure.rule",
+          "name": "traefik.http.routers.filebrowser-secure.rule",
           "value": "Host(`play.yourdomain.com`)"
         },
         {
-          "name": "traefik.http.routers.foundryvtt-secure.service",
-          "value": "foundryvtt"
+          "name": "traefik.http.routers.filebrowser-secure.service",
+          "value": "filebrowser"
         },
         {
-          "name": "traefik.http.routers.foundryvtt-secure.tls",
+          "name": "traefik.http.routers.filebrowser-secure.tls",
           "value": "true"
         },
         {
-          "name": "traefik.http.routers.foundryvtt-secure.tls.certresolver",
+          "name": "traefik.http.routers.filebrowser-secure.tls.certresolver",
           "value": "http"
         },
         {
-          "name": "traefik.http.routers.foundryvtt.entrypoints",
+          "name": "traefik.http.routers.filebrowser.entrypoints",
           "value": "http"
         },
         {
-          "name": "traefik.http.routers.foundryvtt.middlewares",
-          "value": "foundryvtt-https-redirect"
+          "name": "traefik.http.routers.filebrowser.middlewares",
+          "value": "filebrowser-https-redirect"
         },
         {
-          "name": "traefik.http.routers.foundryvtt.rule",
+          "name": "traefik.http.routers.filebrowser.rule",
           "value": "Host(`play.yourdomain.com`)"
         },
         {
-          "name": "traefik.http.services.foundryvtt.loadbalancer.server.port",
-          "value": "30000"
+          "name": "traefik.http.services.filebrowser.loadbalancer.server.port",
+          "value": "80"
         }
       ]
     },
@@ -1236,6 +1236,96 @@
           "label": "API Password"
         }
       ]
+    },
+    {
+      "categories": [
+        "Other",
+        "Downloaders"
+      ],
+      "description": "YoutubeDL-Material is a Material Design frontend for youtube-dl. It's coded using Angular 9 for the frontend, and Node.js on the backend.",
+      "image": "tzahi12345/youtubedl-material:latest",
+      "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/ytdlm.png",
+      "name": "youtubedl-material",
+      "platform": "linux",
+      "ports": [
+        "17442:17442/tcp"
+      ],
+      "restart_policy": "unless-stopped",
+      "title": "YouTubeDL-Material",
+      "type": 1,
+      "volumes": [
+        {
+          "bind": "/portainer/Files/AppData/Config/YTDLM",
+          "container": "/app/appdata"
+        },
+        {
+          "bind": "//Youtube/Video",
+          "container": "/app/video"
+        },
+        {
+          "bind": "//Youtube/Subscriptions",
+          "container": "/app/subscriptions"
+        },
+        {
+          "bind": "/portainer/Files/AppData/Youtube/Users",
+          "container": "/app/users"
+        },
+        {
+          "bind": "//Youtube/Audio",
+          "container": "/app/audio"
+        }
+      ],
+      "labels": [
+        {
+          "name": "traefik.docker.network",
+          "value": "proxy"
+        },
+        {
+          "name": "traefik.enable",
+          "value": "true"
+        },
+        {
+          "name": "traefik.http.middlewares.ytdl-https-redirect.redirectscheme.scheme",
+          "value": "https"
+        },
+        {
+          "name": "traefik.http.routers.ytdl-secure.entrypoints",
+          "value": "https"
+        },
+        {
+          "name": "traefik.http.routers.ytdl-secure.rule",
+          "value": "Host(`play.yourdomain.com`)"
+        },
+        {
+          "name": "traefik.http.routers.ytdl-secure.service",
+          "value": "ytdl"
+        },
+        {
+          "name": "traefik.http.routers.ytdl-secure.tls",
+          "value": "true"
+        },
+        {
+          "name": "traefik.http.routers.ytdl-secure.tls.certresolver",
+          "value": "http"
+        },
+        {
+          "name": "traefik.http.routers.ytdl.entrypoints",
+          "value": "http"
+        },
+        {
+          "name": "traefik.http.routers.ytdl.middlewares",
+          "value": "ytdl-https-redirect"
+        },
+        {
+          "name": "traefik.http.routers.ytdl.rule",
+          "value": "Host(`play.yourdomain.com`)"
+        },
+        {
+          "name": "traefik.http.services.ytdl.loadbalancer.server.port",
+          "value": "17442"
+        }
+      ],
+      "note": "<h3>Template created by Pi-Hosted Series</h3><b>Check our Github page: <a href=\"https://github.com/pi-hosted/pi-hosted\" target=\"_blank\">https://github.com/pi-hosted/pi-hosted</a></b><br><br><b>Official Webpage: </b><a href=\"https://github.com/Tzahi12345/YoutubeDL-Material\" target=\"_blank\">https://github.com/Tzahi12345/YoutubeDL-Material</a><br><b>Official Docker Documentation: </b><a href=\"https://github.com/Tzahi12345/YoutubeDL-Material#docker\" target=\"_blank\">https://github.com/Tzahi12345/YoutubeDL-Material#docker</a><br><br><br>"
     }
   ]
 }
