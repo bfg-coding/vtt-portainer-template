@@ -69,18 +69,54 @@
         }
       ],
       "labels": [
-        {"name": "traefik.docker.network", "value": "proxy"},
-        {"name": "traefik.enable", "value": "true"},
-        {"name": "traefik.http.middlewares.foundryvtt-https-redirect.redirectscheme.scheme", "value": "https"},
-        {"name": "traefik.http.routers.foundryvtt-secure.entrypoints", "value": "https"},
-        {"name": "traefik.http.routers.foundryvtt-secure.rule", "value": "Host(`play.yourdomain.com`)"},
-        {"name": "traefik.http.routers.foundryvtt-secure.service", "value": "foundryvtt"},
-        {"name": "traefik.http.routers.foundryvtt-secure.tls", "value": "true"},
-        {"name": "traefik.http.routers.foundryvtt-secure.tls.certresolver", "value": "http"},
-        {"name": "traefik.http.routers.foundryvtt.entrypoints", "value": "http"},
-        {"name": "traefik.http.routers.foundryvtt.middlewares", "value": "foundryvtt-https-redirect"},
-        {"name": "traefik.http.routers.foundryvtt.rule", "value": "Host(`play.yourdomain.com`)"},
-        {"name": "traefik.http.services.foundryvtt.loadbalancer.server.port", "value": "30000"}
+        {
+          "name": "traefik.docker.network",
+          "value": "proxy"
+        },
+        {
+          "name": "traefik.enable",
+          "value": "true"
+        },
+        {
+          "name": "traefik.http.middlewares.foundryvtt-https-redirect.redirectscheme.scheme",
+          "value": "https"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt-secure.entrypoints",
+          "value": "https"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt-secure.rule",
+          "value": "Host(`play.yourdomain.com`)"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt-secure.service",
+          "value": "foundryvtt"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt-secure.tls",
+          "value": "true"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt-secure.tls.certresolver",
+          "value": "http"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt.entrypoints",
+          "value": "http"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt.middlewares",
+          "value": "foundryvtt-https-redirect"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt.rule",
+          "value": "Host(`play.yourdomain.com`)"
+        },
+        {
+          "name": "traefik.http.services.foundryvtt.loadbalancer.server.port",
+          "value": "30000"
+        }
       ],
       "note": "<h3>Template taken by Pi-Hosted Series</h3><b>Check our Github page: <a href=\"https://github.com/pi-hosted/pi-hosted\" target=\"_blank\">https://github.com/pi-hosted/pi-hosted</a></b><br><br><b>Official Webpage: </b><a href=\"https://foundryvtt.com/\" target=\"_blank\">https://foundryvtt.com/</a><br><b>Official Docker Documentation: </b><a href=\"https://hub.docker.com/r/felddy/foundryvtt\" target=\"_blank\">https://hub.docker.com/r/felddy/foundryvtt</a><br><br><br>"
     },
@@ -799,29 +835,36 @@
       ]
     },
     {
-      "type": 1,
-      "title": "File browser",
-      "description": "A web file manager",
-      "note": "Default credentials: admin/admin",
       "categories": [
-        "filesystem",
-        "storage"
+        "Other",
+        "Tools"
       ],
-      "platform": "linux",
-      "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/filebrowser.png",
+      "description": "Web File Browser which can be used as a middleware or standalone app.",
       "image": "filebrowser/filebrowser:latest",
+      "logo": "https://raw.githubusercontent.com/pi-hosted/pi-hosted/master/images/filebrowser.png",
+      "name": "filebrowser",
+      "note": "<h3>Template taken by Pi-Hosted Series</h3><b>Check our Github page: <a href=\"https://github.com/pi-hosted/pi-hosted\" target=\"_blank\">https://github.com/pi-hosted/pi-hosted</a></b><br><br><b>Official Webpage: </b><a href=\"https://filebrowser.org/\" target=\"_blank\">https://filebrowser.org/</a><br><b>Official Docker Documentation: </b><a href=\"https://filebrowser.org/installation#docker\" target=\"_blank\">https://filebrowser.org/installation#docker</a><br><br><br><b>Youtube Video: </b><a href=\"https://www.youtube.com/watch?v=30MYRgCObu8&list=PL846hFPMqg3jwkxcScD1xw2bKXrJVvarc&index=4\" target=\"_blank\">Installing JDownloader and File Browser On The Pi Docker Server</a><br><br>The default user and password is admin/admin.",
+      "platform": "linux",
       "ports": [
-        "80/tcp"
+        "8082:80/tcp"
       ],
+      "restart_policy": "unless-stopped",
+      "title": "FileBrowser",
+      "type": 1,
       "volumes": [
         {
-          "container": "/data"
+          "bind": "/",
+          "container": "/srv"
         },
         {
-          "container": "/srv"
+          "bind": "/portainer/Files/AppData/Config/filebrowser/filebrowser.db",
+          "container": "/database/filebrowser.db"
+        },
+        {
+          "bind": "/portainer/Files/AppData/Config/filebrowser/settings.json",
+          "container": "/config/settings.json"
         }
-      ],
-      "command": "--port 80 --database /data/database.db --root /srv"
+      ]
     },
     {
       "type": 1,
