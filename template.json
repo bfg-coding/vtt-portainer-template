@@ -60,8 +60,12 @@
       "type": 1,
       "volumes": [
         {
-          "bind": "/portainer/Files/AppData/Config/foundryvtt",
+          "bind": "/",
           "container": "/data"
+        },
+        {
+          "bind": "/",
+          "container": "/data/Data/assets"
         }
       ],
       "labels": [
