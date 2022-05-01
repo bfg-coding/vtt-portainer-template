@@ -864,7 +864,57 @@
           "bind": "/portainer/Files/AppData/Config/filebrowser/settings.json",
           "container": "/config/settings.json"
         }
-      ]
+      ],
+      "labels": [
+        {
+          "name": "traefik.docker.network",
+          "value": "proxy"
+        },
+        {
+          "name": "traefik.enable",
+          "value": "true"
+        },
+        {
+          "name": "traefik.http.middlewares.foundryvtt-https-redirect.redirectscheme.scheme",
+          "value": "https"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt-secure.entrypoints",
+          "value": "https"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt-secure.rule",
+          "value": "Host(`play.yourdomain.com`)"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt-secure.service",
+          "value": "foundryvtt"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt-secure.tls",
+          "value": "true"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt-secure.tls.certresolver",
+          "value": "http"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt.entrypoints",
+          "value": "http"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt.middlewares",
+          "value": "foundryvtt-https-redirect"
+        },
+        {
+          "name": "traefik.http.routers.foundryvtt.rule",
+          "value": "Host(`play.yourdomain.com`)"
+        },
+        {
+          "name": "traefik.http.services.foundryvtt.loadbalancer.server.port",
+          "value": "30000"
+        }
+      ],
     },
     {
       "type": 1,
