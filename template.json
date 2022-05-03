@@ -143,6 +143,56 @@
       "restart_policy": "unless-stopped",
       "title": "Flame",
       "type": 1,
+      "labels": [
+        {
+          "name": "traefik.docker.network",
+          "value": "proxy"
+        },
+        {
+          "name": "traefik.enable",
+          "value": "true"
+        },
+        {
+          "name": "traefik.http.middlewares.flame-https-redirect.redirectscheme.scheme",
+          "value": "https"
+        },
+        {
+          "name": "traefik.http.routers.flame-secure.entrypoints",
+          "value": "https"
+        },
+        {
+          "name": "traefik.http.routers.flame-secure.rule",
+          "value": "Host(`play.yourdomain.com`)"
+        },
+        {
+          "name": "traefik.http.routers.flame-secure.service",
+          "value": "flame"
+        },
+        {
+          "name": "traefik.http.routers.flame-secure.tls",
+          "value": "true"
+        },
+        {
+          "name": "traefik.http.routers.flame-secure.tls.certresolver",
+          "value": "http"
+        },
+        {
+          "name": "traefik.http.routers.flame.entrypoints",
+          "value": "http"
+        },
+        {
+          "name": "traefik.http.routers.flame.middlewares",
+          "value": "flame-https-redirect"
+        },
+        {
+          "name": "traefik.http.routers.flame.rule",
+          "value": "Host(`play.yourdomain.com`)"
+        },
+        {
+          "name": "traefik.http.services.flame.loadbalancer.server.port",
+          "value": "5005"
+        }
+      ],
       "volumes": [
         {
           "bind": "/portainer/Files/AppData/Config/Flame/data",
